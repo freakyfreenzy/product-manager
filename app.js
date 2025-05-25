@@ -80,3 +80,31 @@ function renderProducts(products) {
 window.addEventListener('DOMContentLoaded', () => {
   loadProducts();
 });
+
+let allProducts = []; // To store all fetched products
+
+async function loadProducts() {
+  try {
+    const querySnapshot = await getDocs(collection(db, "products"));
+    allProducts = [];
+    querySnapshot.forEach((doc) => {
+      allProducts.push(doc.data());
+    });
+    renderProducts(allProducts);
+  } catch (error) {
+    console.error("Error loading products:", error);
+  }
+}
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.trim().toLowerCase();
+  if (!query) {
+    renderProducts(allProducts);
+  } else {
+    const filtered = allProducts.filter(product =>
+      product.name.toLowerCase().includes(query)
+    );
+    renderProducts(filtered);
+  }
+});
