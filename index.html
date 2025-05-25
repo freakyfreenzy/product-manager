@@ -46,3 +46,31 @@
 
 <input type="text" id="searchInput" placeholder="Search products by name..." autocomplete="off" />
 <div id="productList"></div>
+
+<!-- Add/Edit Product Modal -->
+<div id="productModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h2 id="modalTitle">Add Product</h2>
+    <form id="productForm">
+      <input type="text" id="productName" placeholder="Product Name" required />
+      <input type="text" id="productImages" placeholder="Image URLs (comma separated)" required />
+      <input type="hidden" id="productId" /> <!-- for edit -->
+      <button type="submit">Save</button>
+      <button type="button" id="cancelBtn">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<button id="addProductBtn">Add New Product</button>
+
+<div id="searchContainer">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search products by name..."
+    autocomplete="off"
+  />
+</div>
+
+<div id="productList"></div>
+
