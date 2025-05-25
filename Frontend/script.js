@@ -1,10 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Sample product data (later this can be fetched from Java backend)
-    const products = [
-        { title: "Product 1", imageUrl: "https://via.placeholder.com/150" },
-        { title: "Product 2", imageUrl: "https://via.placeholder.com/150" },
-        { title: "Product 3", imageUrl: "https://via.placeholder.com/150" }
-    ];
+    // Load stored products or set default empty array
+    let products = JSON.parse(localStorage.getItem("products")) || [];
 
     const productContainer = document.getElementById("product-container");
 
@@ -22,16 +18,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 <button class="restore">Restore</button>
             `;
 
-            // Add event listeners for Take Out & Restore buttons
+            // Take Out Button
             card.querySelector(".take-out").addEventListener("click", function() {
                 if (confirm("Are you sure you want to take this out?")) {
-                    alert(product.title + " has been taken out!");
+                    products.splice(index, 1);  // Remove product from array
+                    localStorage.setItem("products", JSON.stringify(products)); // Update storage
+                    displayProducts(); // Refresh UI
                 }
             });
 
+            // Restore Button (re-add a sample item)
             card.querySelector(".restore").addEventListener("click", function() {
                 if (confirm("Are you sure you want to restore it?")) {
-                    alert(product.title + " has been restored!");
+                    products.push(product);
+                    localStorage.setItem("products", JSON.stringify(products));
+                    displayProducts();
                 }
             });
 
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Call function to display initial products
+    // Initial display
     displayProducts();
 
     // Search functionality
@@ -61,5 +62,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 productContainer.appendChild(card);
             });
+    });
+
+    // Add a new product (sample)
+    document.getElementById("add-product-btn").addEventListener("click", function() {
+        const title = prompt("Enter Product Title:");
+        const imageUrl = prompt("Enter Image URL:");
+        if (title && imageUrl) {
+            products.push({ title, imageUrl });
+            localStorage.setItem("products", JSON.stringify(products));
+            displayProducts();
+        }
     });
 });
