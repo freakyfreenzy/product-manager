@@ -1,65 +1,97 @@
-let products = [
-    {
-        id: 1,
-        name: "Product 1",
-        images: ["image1.jpg", "image2.jpg"],
-        currentImageIndex: 0,
-        isTakenOut: false
-    },
-    {
-        id: 2,
-        name: "Product 2",
-        images: ["image3.jpg", "image4.jpg"],
-        currentImageIndex: 0,
-        isTakenOut: false
+const products = [];
+
+function addProduct() {
+    const name = prompt("Enter product name:");
+    if (!name) return;
+
+    const images = [];
+    for (let i = 0; i < 3; i++) {
+        const imgUrl = prompt(`Enter image URL ${i + 1}:`);
+        if (imgUrl) images.push(imgUrl);
     }
-];
 
-// Function to display products dynamically
-function displayProducts() {
-    const container = document.getElementById("product-container");
-    container.innerHTML = ""; // Clear existing content
+    const product = { name, images, currentImageIndex: 0 };
+    products.push(product);
+    renderProducts();
+}
 
-    products.forEach(product => {
+function renderProducts() {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+
+    products.forEach((product, index) => {
         const productDiv = document.createElement("div");
-        productDiv.classList.add("product-card");
+        productDiv.classList.add("product");
 
-        productDiv.innerHTML = `
-            <h3>${product.name}</h3>
-            <img id="image-${product.id}" src="${product.images[product.currentImageIndex]}" alt="${product.name}">
-            <br>
-            <button onclick="showNextImage(${product.id})">Next Image</button>
-            <button onclick="toggleProductState(${product.id})">
-                ${product.isTakenOut ? "Restore to this state" : "Take out"}
-            </button>
-        `;
+        const img = document.createElement("img");
+        img.src = product.images[product.currentImageIndex];
+        productDiv.appendChild(img);
+
+        const carouselDiv = document.createElement("div");
+        carouselDiv.classList.add("carousel");
+
+        const prevBtn = document.createElement("button");
+        prevBtn.innerText = "<";
+        prevBtn.onclick = () => {
+            product.currentImageIndex = (product.currentImageIndex - 1 + product.images.length) % product.images.length;
+            renderProducts();
+        };
+
+        const nextBtn = document.createElement("button");
+        nextBtn.innerText = ">";
+        nextBtn.onclick = () => {
+            product.currentImageIndex = (product.currentImageIndex + 1) % product.images.length;
+            renderProducts();
+        };
+
+        carouselDiv.appendChild(prevBtn);
+        carouselDiv.appendChild(nextBtn);
+        productDiv.appendChild(carouselDiv);
+
+        const nameDiv = document.createElement("div");
+        nameDiv.innerText = product.name;
+        productDiv.appendChild(nameDiv);
+
+        const btnDiv = document.createElement("div");
+        btnDiv.classList.add("product-buttons");
+
+        const takeOutBtn = document.createElement("button");
+        takeOutBtn.innerText = "Take out";
+        takeOutBtn.onclick = () => alert("Are you sure you want to take out this product?");
         
-        container.appendChild(productDiv);
+        const restoreBtn = document.createElement("button");
+        restoreBtn.innerText = "Restore to this state";
+        restoreBtn.onclick = () => alert("Are you sure you want to restore to this state?");
+        
+        btnDiv.appendChild(takeOutBtn);
+        btnDiv.appendChild(restoreBtn);
+        productDiv.appendChild(btnDiv);
+
+        productList.appendChild(productDiv);
     });
 }
 
-// Function to toggle product state
-function toggleProductState(productId) {
-    const product = products.find(p => p.id === productId);
-    product.isTakenOut = !product.isTakenOut;
-    displayProducts();
-}
+document.getElementById("searchInput").addEventListener("input", function() {
+    const searchText = this.value.toLowerCase();
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchText));
+    
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
 
-// Function to show next image
-function showNextImage(productId) {
-    const product = products.find(p => p.id === productId);
-    product.currentImageIndex = (product.currentImageIndex + 1) % product.images.length;
-    document.getElementById(`image-${productId}`).src = product.images[product.currentImageIndex];
-}
+    filteredProducts.forEach((product, index) => {
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("product");
 
-// Function to search products
-function searchProducts() {
-    let searchValue = document.getElementById("searchBox").value.toLowerCase();
-    products.forEach(product => {
-        const productCard = document.querySelector(`#image-${product.id}`).parentElement;
-        productCard.style.display = product.name.toLowerCase().includes(searchValue) ? "block" : "none";
+        const img = document.createElement("img");
+        img.src = product.images[product.currentImageIndex];
+        productDiv.appendChild(img);
+
+        const nameDiv = document.createElement("div");
+        nameDiv.innerText = product.name;
+        productDiv.appendChild(nameDiv);
+
+        productList.appendChild(productDiv);
     });
-}
+});
 
-// Load initial products
-window.onload = displayProducts;
+renderProducts();
