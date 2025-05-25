@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Manager</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Product Management</h1>
+    <input type="text" id="searchInput" placeholder="Search products..." />
+    <button id="addProductBtn">Add Product</button>
+  </header>
+
+  <main>
+    <div id="productList" class="product-grid">
+      <!-- Products will be dynamically added here via JavaScript -->
+    </div>
+  </main>
+
+  <!-- Modal for Adding/Editing Product -->
+  <div id="productModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2 id="modalTitle">Add Product</h2>
+      <form id="productForm">
+        <input type="text" id="productName" placeholder="Product Name" required />
+        <textarea id="productImages" placeholder="Image URLs (comma separated)" required></textarea>
+        <button type="submit" id="saveProductBtn">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
