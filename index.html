@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Management</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Product Management Dashboard</h1>
+    <div class="auth-buttons">
+      <button id="login-btn">Login</button>
+      <button id="logout-btn" style="display: none;">Logout</button>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside>
+    <button id="add-product-btn">+ Add Product</button>
+    <input type="text" id="search-bar" placeholder="Search products..." />
+  </aside>
+
+  <!-- Main Content -->
+  <main>
+    <div id="product-grid" class="grid-container">
+      <!-- Product cards will be inserted here -->
+    </div>
+  </main>
+
+  <!-- Product Modal -->
+  <div id="product-modal" class="modal hidden">
+    <div class="modal-content">
+      <span id="close-modal" class="close">&times;</span>
+      <form id="product-form">
+        <h2>Add / Edit Product</h2>
+        <label for="product-name">Product Name</label>
+        <input type="text" id="product-name" name="product-name" required />
+
+        <label for="product-images">Upload Images</label>
+        <input type="file" id="product-images" name="product-images" multiple accept="image/*" />
+
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
