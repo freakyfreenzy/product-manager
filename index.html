@@ -13,7 +13,6 @@
     <h1>Product Management</h1>
     <div class="auth-buttons">
       <button id="login-btn">Login</button>
-      <button id="logout-btn" style="display: none;">Logout</button>
     </div>
   </header>
 
@@ -23,14 +22,7 @@
     <input type="text" id="search-bar" placeholder="Search products..." />
   </div>
 
-  <!-- Main Product Grid -->
-  <main>
-    <div id="product-grid" class="grid-container">
-      <!-- Product cards will appear here -->
-    </div>
-  </main>
-
-  <!-- Product Modal -->
+  <!-- Modal for Add/Edit Product -->
   <div id="product-modal" class="modal hidden">
     <div class="modal-content">
       <span id="close-modal" class="close">&times;</span>
@@ -46,7 +38,6 @@
         </div>
 
         <button type="button" id="add-image-url">+ Add Another Image</button>
-
         <button type="submit">Save Product</button>
       </form>
     </div>

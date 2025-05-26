@@ -8,10 +8,10 @@ document.getElementById('close-modal').addEventListener('click', () => {
 
 document.getElementById('add-image-url').addEventListener('click', () => {
   const container = document.getElementById('image-url-container');
-  const newInput = document.createElement('input');
-  newInput.type = 'text';
-  newInput.name = 'image-url[]';
-  newInput.className = 'image-url-input';
-  newInput.placeholder = 'Enter image URL';
-  container.appendChild(newInput);
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.name = 'image-url[]';
+  input.placeholder = 'Enter image URL';
+  input.className = 'image-url-input';
+  container.appendChild(input);
 });
