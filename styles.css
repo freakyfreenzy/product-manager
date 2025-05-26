@@ -108,3 +108,18 @@ body {
 .hidden {
   display: none;
 }
+
+/* Just modal-specific additions */
+#image-url-container input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 6px;
+}
+
+#add-image-url {
+  margin-top: 10px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
