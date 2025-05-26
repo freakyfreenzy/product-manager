@@ -1,43 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Management</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Modal</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link CSS file -->
 </head>
 <body>
-  <header class="header">
-    <h1>Product Management</h1>
-    <div class="auth-buttons">
-      <button id="login-btn">Login</button>
-    </div>
-  </header>
 
-  <div class="toolbar">
-    <button id="add-product-btn">+ Add Product</button>
-    <input type="text" id="search-bar" placeholder="Search products..." />
-  </div>
+    <!-- Button to open modal -->
+    <button id="add-product-btn">Add Product</button>
 
-  <div id="product-modal" class="modal hidden">
-    <div class="modal-content">
-      <span id="close-modal" class="close">&times;</span>
-      <form id="product-form">
+    <!-- Overlay and Modal -->
+    <div id="overlay" class="overlay"></div>
+    <div id="product-modal" class="modal">
         <h2>Add Product</h2>
-        <label for="product-name">Product Name</label>
-        <input type="text" id="product-name" name="product-name" required />
-
+        <button id="close-modal">Close</button>
         <div id="image-url-container">
-          <label>Image URL</label>
-          <input type="text" name="image-url[]" class="image-url-input" placeholder="Enter image URL" />
+            <button id="add-image-url">Add Image URL</button>
         </div>
-
-        <button type="button" id="add-image-url">+ Add Another Image</button>
-        <button type="submit">Save Product</button>
-      </form>
     </div>
-  </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Link JS file -->
 </body>
 </html>
